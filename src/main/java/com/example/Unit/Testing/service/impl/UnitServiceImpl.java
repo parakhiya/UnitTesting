@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class UnitServiceImpl implements com.example.Unit.Testing.service.UnitService {
   @Autowired
-  UnitRepository unitRepository;
-  Logger logger = LoggerFactory.getLogger(UnitServiceImpl.class);
+  private UnitRepository unitRepository;
+  private Logger logger = LoggerFactory.getLogger(UnitServiceImpl.class);
 
   private History saveHistory(int operand1, int operand2, String operator, float result) {
     History history = new History();

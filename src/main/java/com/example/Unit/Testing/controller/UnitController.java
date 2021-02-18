@@ -20,7 +20,7 @@ import static com.example.Unit.Testing.constant.UnitConstant.*;
 public class UnitController {
 
   @Autowired
-  UnitServiceImpl unitService;
+  private UnitServiceImpl unitService;
 
   @GetMapping(value = SUM,consumes = MediaType.APPLICATION_JSON_VALUE)
   public Response sum(@RequestBody RequestBodyClass requestBodyClass) {

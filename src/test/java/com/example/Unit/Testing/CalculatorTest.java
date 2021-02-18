@@ -30,13 +30,13 @@ import java.util.List;
 
 public class CalculatorTest {
   @Mock
-  UnitRepository unitRepository;
+  private UnitRepository unitRepository;
   @InjectMocks
-  UnitService unitServiceImpl = new UnitServiceImpl();
+  private UnitService unitServiceImpl = new UnitServiceImpl();
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
   @Captor
-  ArgumentCaptor<History> historyCaptor;
+  private ArgumentCaptor<History> historyCaptor;
 
   @Test
   public void testSum() {
