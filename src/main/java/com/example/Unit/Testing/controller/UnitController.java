@@ -22,32 +22,32 @@ public class UnitController {
   @Autowired
   private UnitServiceImpl unitService;
 
-  @GetMapping(value = SUM,consumes = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = SUM,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public Response sum(@RequestBody RequestBodyClass requestBodyClass) {
       return unitService.sum(requestBodyClass.getOperand1(), requestBodyClass.getOperand2());
   }
 
-  @GetMapping(MINUS)
+  @GetMapping(value=MINUS,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public Response minus(@RequestBody RequestBodyClass requestBodyClass) {
     return unitService.minus(requestBodyClass.getOperand1(), requestBodyClass.getOperand2());
   }
 
-  @GetMapping(MULTIPLY)
+  @GetMapping(value=MULTIPLY,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public Response multiply(@RequestBody RequestBodyClass requestBodyClass) {
     return unitService.multiply(requestBodyClass.getOperand1(), requestBodyClass.getOperand2());
   }
 
-  @GetMapping(DIVIDE)
+  @GetMapping(value=DIVIDE,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
   public Response divide(@RequestBody RequestBodyClass requestBodyClass) {
     return unitService.divide(requestBodyClass.getOperand1(), requestBodyClass.getOperand2());
   }
 
-  @GetMapping(FINDALL)
+  @GetMapping(value=FINDALL,produces = MediaType.APPLICATION_JSON_VALUE)
   public List<History> findAll() {
     return unitService.findAll();
   }
 
-  @GetMapping(FINDBYOPERATOR)
+  @GetMapping(value=FINDBYOPERATOR,produces = MediaType.APPLICATION_JSON_VALUE)
   public List<History> findByOperator(@PathVariable String query) {
     if (query.equals("*") || query.equals("/") || query.equals("+") || query.equals("-"))
       return unitService.findByOperator(query);
@@ -60,12 +60,12 @@ public class UnitController {
     }
   }
 
-  @GetMapping(FINDBYOPERAND)
+  @GetMapping(value=FINDBYOPERAND,produces = MediaType.APPLICATION_JSON_VALUE)
   public List<History> findByOperand(@PathVariable int query) {
     return unitService.findByOperand(query);
   }
 
-  @GetMapping(SUMBYOPERATOR)
+  @GetMapping(value=SUMBYOPERATOR,produces = MediaType.APPLICATION_JSON_VALUE)
   public Response sumByOperator(@PathVariable String query) {
     return unitService.sumByOperator(query);
   }
