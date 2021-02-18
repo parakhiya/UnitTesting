@@ -1,31 +1,27 @@
 package com.example.Unit.Testing;
 
-import com.example.Unit.Testing.entity.History;
-import com.example.Unit.Testing.entity.Response;
-import com.example.Unit.Testing.repository.UnitRepository;
-import com.example.Unit.Testing.service.UnitService;
-import com.example.Unit.Testing.service.impl.UnitServiceImpl;
+import static junit.framework.TestCase.fail;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.lenient;
 
-import org.junit.After;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
-import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.Unit.Testing.entity.History;
+import com.example.Unit.Testing.entity.Response;
+import com.example.Unit.Testing.repository.UnitRepository;
+import com.example.Unit.Testing.service.UnitService;
+import com.example.Unit.Testing.service.impl.UnitServiceImpl;
 
 
 public class CalculatorTest {
@@ -49,14 +45,14 @@ public class CalculatorTest {
 
   @Test
   public void testSumException() {
-      Response response= unitServiceImpl.sum(Integer.MAX_VALUE,44);
+    Response response = unitServiceImpl.sum(Integer.MAX_VALUE, 44);
 
-      if(response.getMessage().equals("Integer OverFlow!"))
+    if (response.getMessage().equals("Integer OverFlow!"))
       assertEquals("Integer OverFlow!", response.getMessage());
-      else {
-        fail("Integer OverFlow!");
-      }
-}
+    else {
+      fail("Integer OverFlow!");
+    }
+  }
 
   @Test
   public void testMinus() {
@@ -69,8 +65,8 @@ public class CalculatorTest {
 
   @Test
   public void testMinusExceptionOverFlow() {
-      Response response=  unitServiceImpl.minus(Integer.MAX_VALUE, -9);
-    if(response.getMessage().equals("Integer OverFlow!"))
+    Response response = unitServiceImpl.minus(Integer.MAX_VALUE, -9);
+    if (response.getMessage().equals("Integer OverFlow!"))
       assertEquals("Integer OverFlow!", response.getMessage());
     else {
       fail("Integer OverFlow!");
@@ -80,8 +76,8 @@ public class CalculatorTest {
   @Test
   public void testMinusExceptionUnderFlow() {
 
-    Response response=  unitServiceImpl.minus(-9, Integer.MAX_VALUE);
-    if(response.getMessage().equals("Integer UnderFlow!"))
+    Response response = unitServiceImpl.minus(-9, Integer.MAX_VALUE);
+    if (response.getMessage().equals("Integer UnderFlow!"))
       assertEquals("Integer UnderFlow!", response.getMessage());
     else {
       fail("Integer UnderFlow!");
@@ -99,8 +95,8 @@ public class CalculatorTest {
 
   @Test
   public void testMultiplyExceptionOverFlow() {
-    Response response=  unitServiceImpl.multiply(Integer.MAX_VALUE, 2);
-    if(response.getMessage().equals("Integer OverFlow!"))
+    Response response = unitServiceImpl.multiply(Integer.MAX_VALUE, 2);
+    if (response.getMessage().equals("Integer OverFlow!"))
       assertEquals("Integer OverFlow!", response.getMessage());
     else {
       fail("Integer OverFlow!");
@@ -110,8 +106,8 @@ public class CalculatorTest {
   @Test
   public void testMultiplyExceptionUnderFlow() {
 
-    Response response=  unitServiceImpl.multiply(Integer.MAX_VALUE, -2);
-    if(response.getMessage().equals("Integer UnderFlow!"))
+    Response response = unitServiceImpl.multiply(Integer.MAX_VALUE, -2);
+    if (response.getMessage().equals("Integer UnderFlow!"))
       assertEquals("Integer UnderFlow!", response.getMessage());
     else {
       fail("Integer UnderFlow!");
@@ -129,8 +125,8 @@ public class CalculatorTest {
 
   @Test
   public void testDivideException() {
-    Response response=  unitServiceImpl.divide(2, 0);
-    if(response.getMessage().equals("divisor is 0"))
+    Response response = unitServiceImpl.divide(2, 0);
+    if (response.getMessage().equals("divisor is 0"))
       assertEquals("divisor is 0", response.getMessage());
     else {
       fail("divisor is 0");
@@ -140,8 +136,8 @@ public class CalculatorTest {
   @Test
   public void testSumByOperator() {
     lenient().when(unitRepository.save(new History())).thenReturn(null);
-    List<History> list=new ArrayList<>();
-    list.add(new History("hle23",2,3,"*",6.0,null));
+    List<History> list = new ArrayList<>();
+    list.add(new History("hle23", 2, 3, "*", 6.0, null));
     lenient().when(unitRepository.findByOperator("*")).thenReturn(list);
     Response response = unitServiceImpl.sumByOperator("*");
     System.out.println(response);

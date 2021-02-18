@@ -30,7 +30,6 @@ import com.example.Unit.Testing.entity.Response;
 import com.example.Unit.Testing.service.impl.UnitServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@RunWith(MockitoJUnitRunner.class)
 @WebMvcTest(UnitController.class)
 public class UnitControllerTest {
   @Rule
